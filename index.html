@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style/css.css">
+</head>
+
+<body>
+    <h1>Escreve e-mail:</h1>
+    <div>
+        <h2>Horário:</h2>
+        <input type="radio" id="manha" name="horario"><label>Manhã</label><br>
+        <input type="radio" id="tarde" name="horario"><label>Tarde</label><br>
+        <input type="radio" id="noite" name="horario"><label>Noite</label>
+    </div>
+    <div>
+        <h2>Gênero professor:</h2>
+        <input type="radio" id="mas" name="genero"><label>Masculino</label><br>
+        <input type="radio" id="fem" name="genero"><label>Feminino</label><br>
+    </div>
+    <div>
+        <h2>Sobre o trabalho:</h2>
+        <input type="text" id="sobre" name="texto">
+    </div>
+    <div>
+        <h2>Data da aula:</h2>
+        <input type="date" id="data" name="data">
+    </div>
+    <div>
+        <h2>Tipo de arquivo:</h2>
+        <input type="radio" id="word" name="tipo"><label>Word</label><br>
+        <input type="radio" id="pptx" name="tipo"><label>Power Point</label><br>
+        <input type="radio" id="excel" name="tipo"><label>Excel</label><br>
+        <input type="radio" id="pdf" name="tipo"><label>PDF</label><br>
+        <input type="radio" id="link" name="tipo"><label>Link</label>
+    </div>
+    <div>
+        <br>
+        <input type="submit" id="enviar" name="enviar" placeholder="Enviar" onclick="mensagem()">
+    </div>
+    <div>
+        <h2>Mensagem: </h2>
+        <textarea rows="10" cols="50" class="msg" id="msg"></textarea><br>
+        <input type="button" id="copiar" name="copiar" value="Copiar" onclick="copiarMensagem()">
+    </div>
+</body>
+
+<script>
+    function mensagem() {
+        //horario
+        var horario = document.getElementsByName("horario");
+        var hora2 = "";
+        //genero
+        var genero = document.getElementsByName("genero");
+        var gen2 = "";
+        //sobre
+        var text = document.getElementById("sobre").value;
+        //data
+        var data = new String(document.getElementById("data").value);
+        var dataFormatada = data.split("-", 3);
+        //arquivo
+        var tipo = document.getElementsByName("tipo");
+        var tipo2 = "";
+
+        if (horario[0].checked) {
+            hora2 = "Bom dia ";
+        } else if (horario[1].checked) {
+            hora2 = "Boa tarde ";
+        } else {
+            hora2 = "Boa noite ";
+        }
+
+        if (genero[0].checked) {
+            gen2 = "professor, ";
+        } else {
+            gen2 = "professora, ";
+        }
+
+        if (tipo[0].checked) {
+            tipo2 = "o arquivo Word ";
+        } else if (tipo[1].checked) {
+            tipo2 = "o arquivo Power Point ";
+        } else if (tipo[2].checked) {
+            tipo2 = "o arquivo Excel ";
+        } else if (tipo[3].checked) {
+            tipo2 = "o PDF ";
+        } else {
+            tipo2 = "o Link ";
+        }
+
+        document.getElementById("msg").value = hora2 + gen2 + "por este e-mail venho lhe enviar " + text + ", disponibilizado no dia " + dataFormatada[2] + "/" + dataFormatada[1] +
+            ".\nSegue abaixo " + tipo2 + "da atividade realizada" +
+            "\n\nAtenciosamente," +
+            "\nEduardo Santos (BI3006026)" +
+            "\nEquipe/curso 2º INFO.";
+    }
+
+    function copiarMensagem() {
+        document.querySelector("#msg").select();
+        document.execCommand("copy");
+    }
+</script>
+
+
+</html>
+
+<!-- Boa tarde professor, por este e-mail venho enviar nossa lista de atividades sobre o Dia da Consciência Negra, disponibilizado pelo Sr. no dia 19.11.
+Segue em anexo o arquivo Word da atividade realizada.
+
+Atenciosamente,
+Eduardo Santos (BI3006026)
+Equipe/curso 2º INFO. -->
